@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Image from "next/image"
 import ScrollAnimation from "./ScrollAnimation"
 
 const TypeWriter = ({ text, speed = 100 }: { text: string; speed?: number }) => {
@@ -73,7 +72,7 @@ const AboutSection = () => {
             <ScrollAnimation animation="fade-up" delay={800}>
               <div className="text-lg text-gray-400 leading-relaxed space-y-4">
                 <p>
-                  I'm a passionate full-stack developer who loves creating digital experiences 
+                  I&apos;m a passionate full-stack developer who loves creating digital experiences 
                   that blend creativity with functionality.
                 </p>
                 <p>
@@ -81,7 +80,7 @@ const AboutSection = () => {
                   that make a difference and solve real-world problems.
                 </p>
                 <p>
-                  When I'm not coding, you can find me exploring new technologies, 
+                  When I&apos;m not coding, you can find me exploring new technologies, 
                   contributing to open source, or sharing knowledge with the developer community.
                 </p>
               </div>
@@ -92,11 +91,10 @@ const AboutSection = () => {
               <div className="mt-8">
                 <h3 className="text-xl text-white mb-4">Technologies I work with:</h3>
                 <div className="flex flex-wrap gap-3">
-                  {['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'Three.js'].map((tech, index) => (
+                  {['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'Three.js'].map((tech) => (
                     <span 
                       key={tech}
                       className="px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-white text-sm hover:bg-white/20 transition-colors duration-300"
-                      style={{ animationDelay: `${index * 100}ms` }}
                     >
                       {tech}
                     </span>
