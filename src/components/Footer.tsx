@@ -69,10 +69,10 @@ const Footer = () => {
         <ScrollAnimation animation="fade-up" delay={200}>
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
-              Let's <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">Connect</span>
+              Let&apos;s <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">Connect</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Ready to bring your ideas to life? Let's discuss your next project and create something amazing together.
+              Ready to bring your ideas to life? Let&apos;s discuss your next project and create something amazing together.
             </p>
           </div>
         </ScrollAnimation>
@@ -139,8 +139,8 @@ const Footer = () => {
                 Ready to start your project?
               </h3>
               <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-                I'm always excited to work on new projects and collaborate with amazing people. 
-                Drop me a message and let's create something extraordinary!
+                I&apos;m always excited to work on new projects and collaborate with amazing people. 
+                Drop me a message and let&apos;s create something extraordinary!
               </p>
               <a
                 href="mailto:hello@shubhammohapatra.com"
@@ -169,7 +169,7 @@ const Footer = () => {
                   <span className="text-white font-semibold">Shubham Mohapatra</span>
                 </p>
                 <p className="text-gray-400 text-sm mt-1">
-                  © {currentYear} All rights reserved.
+                  © {currentYear} All rights reserved. Don&apos;t forget to check out my GitHub!
                 </p>
               </div>
 
@@ -200,7 +200,6 @@ const Footer = () => {
                   Contact
                 </a>
               </div>
-
               {/* Back to Top */}
               <button
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

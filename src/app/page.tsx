@@ -56,7 +56,7 @@ export default function Home() {
           curvature={0}
           tint="#003300"
           mouseReact={true}
-          mouseStrength={0.5}
+          mouseStrength={1.5}
           pageLoadAnimation={false}
           brightness={1}
           className="w-full h-full"
