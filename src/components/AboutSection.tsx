@@ -1,31 +1,9 @@
 "use client"
 
-import { useEffect, useState } from "react"
+// import { useEffect, useState } from "react"
 import ScrollAnimation from "./ScrollAnimation"
 import ProfileCard from "./ProfileCard"
 
-const TypeWriter = ({ text, speed = 100 }: { text: string; speed?: number }) => {
-  const [displayedText, setDisplayedText] = useState("")
-  const [currentIndex, setCurrentIndex] = useState(0)
-
-  useEffect(() => {
-    if (currentIndex < text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedText(prev => prev + text[currentIndex])
-        setCurrentIndex(prev => prev + 1)
-      }, speed)
-
-      return () => clearTimeout(timeout)
-    }
-  }, [currentIndex, text, speed])
-
-  return (
-    <span>
-      {displayedText}
-      <span className="animate-pulse">|</span>
-    </span>
-  )
-}
 
 const AboutSection = () => {
   return (

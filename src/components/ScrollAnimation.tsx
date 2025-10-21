@@ -48,7 +48,7 @@ export default function ScrollAnimation({
         observer.unobserve(element)
       }
     }
-  }, [delay])
+  }, [delay, onInView])
 
   return (
     <div 
