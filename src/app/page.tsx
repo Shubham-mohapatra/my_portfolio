@@ -2,7 +2,7 @@
 import PillNav from "../components/PillNav";
 import AboutSection from "../components/AboutSection";
 import Footer from "../components/Footer";
-import FaultyTerminal from "../components/FaultyTerminal";
+import LetterGlitch from "../components/LetterGlitch";
 import RotatingText from "../components/RotatingText";
 import { useState, useEffect } from "react"
 
@@ -40,27 +40,12 @@ export default function Home() {
   return (
     <div className="bg-black relative overflow-hidden">
       {/* Fixed background */}
-      <div className="fixed inset-0 w-full h-full z-0">
-        <FaultyTerminal
-          scale={1.5}
-          gridMul={[2, 1]}
-          digitSize={1.2}
-          timeScale={1}
-          pause={false}
-          scanlineIntensity={1}
-          glitchAmount={1}
-          flickerAmount={1}
-          noiseAmp={1}
-          chromaticAberration={0}
-          dither={0}
-          curvature={0}
-          tint="#003300"
-          mouseReact={true}
-          mouseStrength={1.5}
-          pageLoadAnimation={false}
-          brightness={1}
-          className="w-full h-full"
-          style={{ width: '100%', height: '100%' }}
+      <div className="fixed inset-0 w-full h-full z-0" style={{ opacity: 0.8 }}>
+        <LetterGlitch
+          glitchSpeed={50}
+          centerVignette={true}
+          outerVignette={false}
+          smooth={true}
         />
       </div>
       
