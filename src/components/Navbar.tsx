@@ -27,6 +27,12 @@ const Navbar = () => {
             About
           </button>
           <button 
+            onClick={() => smoothScrollTo('skills')} 
+            className="text-white hover:text-pink-400 transition-colors duration-300"
+          >
+            Skills
+          </button>
+          <button 
             onClick={() => smoothScrollTo('projects')} 
             className="text-white hover:text-pink-400 transition-colors duration-300"
           >
@@ -37,12 +43,6 @@ const Navbar = () => {
             className="text-white hover:text-pink-400 transition-colors duration-300"
           >
             Contact
-          </button>
-          <button 
-            onClick={() => smoothScrollTo('skills')} 
-            className="text-white hover:text-pink-400 transition-colors duration-300"
-          >
-            Skills
           </button>
         </div>
 

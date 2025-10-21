@@ -7,13 +7,15 @@ interface ScrollAnimationProps {
   animation?: 'fade-up' | 'fade-left' | 'fade-right' | 'fade-scale'
   delay?: number
   className?: string
+  onInView?: () => void
 }
 
 export default function ScrollAnimation({ 
   children, 
   animation = 'fade-up', 
   delay = 0,
-  className = '' 
+  className = '',
+  onInView
 }: ScrollAnimationProps) {
   const elementRef = useRef<HTMLDivElement>(null)
 
@@ -27,6 +29,7 @@ export default function ScrollAnimation({
           if (entry.isIntersecting) {
             setTimeout(() => {
               entry.target.classList.add('visible')
+              if (onInView) onInView()
             }, delay)
             observer.unobserve(entry.target)
           }

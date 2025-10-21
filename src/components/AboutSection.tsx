@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import ScrollAnimation from "./ScrollAnimation"
+import ProfileCard from "./ProfileCard"
 
 const TypeWriter = ({ text, speed = 100 }: { text: string; speed?: number }) => {
   const [displayedText, setDisplayedText] = useState("")
@@ -31,24 +32,28 @@ const AboutSection = () => {
     <section id="about" className="min-h-screen flex items-center justify-center px-6 py-20">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Side - Photo */}
+          {/* Left Side - ProfileCard */}
           <ScrollAnimation animation="fade-left" delay={200}>
-            <div className="flex justify-center lg:justify-start">
-              <div className="relative">
-                {/* Three.js Container - We'll add this later */}
-                <div className="w-80 h-80 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 p-1 shadow-2xl">
-                  <div className="w-full h-full rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center">
-                    {/* Placeholder for your photo */}
-                    <div className="w-72 h-72 rounded-full bg-gradient-to-r from-gray-300 to-gray-400 flex items-center justify-center text-gray-600 text-xl font-semibold">
-                      Your Photo Here
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Floating elements around photo */}
-                <div className="absolute -top-4 -right-4 w-8 h-8 bg-yellow-400 rounded-full animate-bounce"></div>
-                <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-pink-400 rounded-full animate-pulse"></div>
-                <div className="absolute top-1/2 -left-8 w-4 h-4 bg-purple-400 rounded-full animate-ping"></div>
+            <div className="flex justify-center lg:justify-center lg:pl-8">
+              <div className="scale-75">
+                <ProfileCard
+                  name=""
+                  title=""
+                  handle=""
+                  status=""
+                  contactText="Contact Me"
+                  avatarUrl="/photo.jpg"
+                  miniAvatarUrl="/photo.jpg"
+                  behindGradient="none"
+                  innerGradient="none"
+                  showBehindGradient={false}
+                  showUserInfo={false}
+                  enableTilt={true}
+                  enableMobileTilt={false}
+                  onContactClick={() => {
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                />
               </div>
             </div>
           </ScrollAnimation>
@@ -59,16 +64,6 @@ const AboutSection = () => {
                 About Me
               </h2>
             </ScrollAnimation>
-            
-            <ScrollAnimation animation="fade-up" delay={600}>
-              <div className="text-2xl md:text-3xl text-gray-300 mb-6 min-h-[100px]">
-                <TypeWriter 
-                  text="Hi, I am Shubham Mohapatra" 
-                  speed={150}
-                />
-              </div>
-            </ScrollAnimation>
-            
             <ScrollAnimation animation="fade-up" delay={800}>
               <div className="text-lg text-gray-400 leading-relaxed space-y-4">
                 <p>
@@ -80,7 +75,7 @@ const AboutSection = () => {
                   that make a difference and solve real-world problems.
                 </p>
                 <p>
-                  When I&apos;m not coding, you can find me exploring new technologies, 
+                  When I am not coding, you can find me exploring new technologies, 
                   contributing to open source, or sharing knowledge with the developer community.
                 </p>
               </div>

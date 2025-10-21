@@ -1,57 +1,14 @@
 "use client"
-
-import Navbar from "../components/Navbar";
+import PillNav from "../components/PillNav";
 import AboutSection from "../components/AboutSection";
-import ScrollAnimation from "../components/ScrollAnimation";
-import { useEffect, useState } from "react"
-
-const ContinuousTypeWriter = ({ texts, speed = 100, pauseDuration = 2000 }: { 
-  texts: string[]; 
-  speed?: number; 
-  pauseDuration?: number; 
-}) => {
-  const [displayedText, setDisplayedText] = useState("")
-  const [currentTextIndex, setCurrentTextIndex] = useState(0)
-  const [currentCharIndex, setCurrentCharIndex] = useState(0)
-  const [isDeleting, setIsDeleting] = useState(false)
-
-  useEffect(() => {
-    const currentText = texts[currentTextIndex]
-    
-    const timeout = setTimeout(() => {
-      if (!isDeleting) {
-        // Typing forward
-        if (currentCharIndex < currentText.length) {
-          setDisplayedText(currentText.substring(0, currentCharIndex + 1))
-          setCurrentCharIndex(prev => prev + 1)
-        } else {
-          setTimeout(() => setIsDeleting(true), pauseDuration)
-        }
-      } else {
-     
-        if (currentCharIndex > 0) {
-          setDisplayedText(currentText.substring(0, currentCharIndex - 1))
-          setCurrentCharIndex(prev => prev - 1)
-        } else {
-      
-          setIsDeleting(false)
-          setCurrentTextIndex(prev => (prev + 1) % texts.length)
-        }
-      }
-    }, isDeleting ? speed / 2 : speed)
-
-    return () => clearTimeout(timeout)
-  }, [currentCharIndex, currentTextIndex, isDeleting, texts, speed, pauseDuration])
-
-  return (
-    <span>
-      {displayedText}
-      <span className="animate-pulse text-pink-400">|</span>
-    </span>
-  )
-}
+import Footer from "../components/Footer";
+import FaultyTerminal from "../components/FaultyTerminal";
+import RotatingText from "../components/RotatingText";
+import { useState, useEffect } from "react"
 
 export default function Home() {
+  const [activeSection, setActiveSection] = useState('#about')
+
   const scrollToAbout = () => {
     const aboutSection = document.getElementById('about')
     if (aboutSection) {
@@ -59,48 +16,111 @@ export default function Home() {
     }
   }
 
-  return (
-    <div className="bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
-      {/* Navbar */}
-      <Navbar />
-      
-      {/* Hero Section */}
-      <div className="min-h-screen relative">
-        <div className="absolute inset-0">
-          <div className="absolute top-10 left-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-          <div className="absolute top-10 right-10 w-72 h-72 bg-yellow-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-        </div>
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['about', 'skills', 'projects', 'contact']
+      const scrollPosition = window.scrollY + window.innerHeight / 2
 
+      for (const section of sections) {
+        const element = document.getElementById(section)
+        if (element) {
+          const { offsetTop, offsetHeight } = element
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(`#${section}`)
+            break
+          }
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  return (
+    <div className="bg-black relative overflow-hidden">
+      {/* Fixed background */}
+      <div className="fixed inset-0 w-full h-full z-0">
+        <FaultyTerminal
+          scale={1.5}
+          gridMul={[2, 1]}
+          digitSize={1.2}
+          timeScale={1}
+          pause={false}
+          scanlineIntensity={1}
+          glitchAmount={1}
+          flickerAmount={1}
+          noiseAmp={1}
+          chromaticAberration={0}
+          dither={0}
+          curvature={0}
+          tint="#003300"
+          mouseReact={true}
+          mouseStrength={0.5}
+          pageLoadAnimation={false}
+          brightness={1}
+          className="w-full h-full"
+          style={{ width: '100%', height: '100%' }}
+        />
+      </div>
+      
+      {/* Main content wrapper */}
+      <div className="relative z-10">
+        {/* Fixed PillNav */}
+        <div className="fixed top-0 left-0 right-0 z-50">
+          <PillNav
+          items={[
+            { label: 'About', href: '#about' },
+            { label: 'Skills', href: '#skills' },
+            { label: 'Projects', href: '#projects' },
+            { label: 'Resume', href: '#resume' }
+          ]}
+          activeHref={activeSection}
+          className="custom-nav"
+          ease="power2.easeOut"
+          baseColor="#000000"
+          pillColor="#ffffff"
+          hoveredPillTextColor="#ffffff"
+          pillTextColor="#000000"
+          onMobileMenuClick={() => {}}
+          />
+        </div>
+      
+  {/* Hero Section */}
+  <div className="min-h-screen relative z-10">
         {/* Hero content */}
         <main className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 text-center">
-          <ScrollAnimation animation="fade-up" delay={100}>
-            <h1 className="text-6xl md:text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 mb-4 animate-pulse">
+          <div>
+            <h1 className="text-6xl md:text-8xl font-extrabold text-white mb-4">
             Shubham Mohapatra
             </h1>
-          </ScrollAnimation>
+          </div>
           
-          <ScrollAnimation animation="fade-up" delay={300}>
+          <div>
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              <ContinuousTypeWriter 
+              <RotatingText 
                 texts={[
                   "I'm a Developer",
                   "I'm a Problem Solver",
                   "I Build Amazing Apps"
                 ]}
-                speed={120}
-                pauseDuration={1500}
+                rotationInterval={2000}
+                splitBy="lines"
+                staggerDuration={0}
+                initial={{ y: '100%', opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: '-100%', opacity: 0 }}
               />
             </h2>
-          </ScrollAnimation>
+          </div>
           
-          <ScrollAnimation animation="fade-up" delay={500}>
+          <div>
             <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mb-8">
               Creating digital experiences that blend creativity with functionality
             </p>
-          </ScrollAnimation>
+          </div>
 
-          <ScrollAnimation animation="fade-scale" delay={700}>
+          <div>
             <div className="flex gap-4">
               <button 
                 onClick={scrollToAbout}
@@ -115,11 +135,9 @@ export default function Home() {
                 Contact Me
               </button>
             </div>
-          </ScrollAnimation>
+          </div>
         </main>
-
-        {/* Scroll indicator - positioned relative to hero section */}
-        <ScrollAnimation animation="fade-up" delay={900}>
+        <div>
           <div 
             className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer z-20"
             onClick={scrollToAbout}
@@ -128,10 +146,29 @@ export default function Home() {
               <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
             </div>
           </div>
-        </ScrollAnimation>
+        </div>
       </div>
+  <AboutSection />
+      
+  {/* Skills Section */}
+  <section id="skills" className="relative z-10 min-h-screen flex items-center justify-center px-6 py-20 bg-black">
+    <div className="max-w-6xl mx-auto text-center">
+      <h2 className="text-5xl font-bold text-white mb-8">Skills</h2>
+      <p className="text-xl text-gray-300">Skills section coming soon...</p>
+    </div>
+  </section>
 
-      <AboutSection />
+  {/* Projects Section */}
+  <section id="projects" className="relative z-10 min-h-screen flex items-center justify-center px-6 py-20 bg-black">
+    <div className="max-w-6xl mx-auto text-center">
+      <h2 className="text-5xl font-bold text-white mb-8">Projects</h2>
+      <p className="text-xl text-gray-300">Projects section coming soon...</p>
+    </div>
+  </section>
+
+  {/* Footer with Contact */}
+  <Footer />
+      </div>
     </div>
   );
 }
