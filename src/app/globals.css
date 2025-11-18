@@ -35,6 +35,15 @@ a {
 }
 
 /* Custom utility classes */
+.background-overlay {
+  opacity: 0.3;
+}
+
+.variable-proximity-heading,
+.variable-proximity-text {
+  font-family: 'Roboto Flex', sans-serif;
+}
+
 .animation-delay-2000 {
   animation-delay: 2s;
 }

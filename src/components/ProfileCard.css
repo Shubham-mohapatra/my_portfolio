@@ -116,8 +116,9 @@
 }
 
 .pc-shine {
+  -webkit-mask-image: var(--icon);
   mask-image: var(--icon);
-  mask-mode: luminance;
+  -webkit-mask-repeat: repeat;
   mask-repeat: repeat;
   mask-size: 150%;
   mask-position: top calc(200% - (var(--background-y) * 5)) left calc(100% - var(--background-x));

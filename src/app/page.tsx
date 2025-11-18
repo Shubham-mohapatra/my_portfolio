@@ -1,13 +1,26 @@
 "use client"
 import PillNav from "../components/PillNav";
 import AboutSection from "../components/AboutSection";
+import SkillsSection from "../components/SkillsSection";
 import Footer from "../components/Footer";
 import LetterGlitch from "../components/LetterGlitch";
 import RotatingText from "../components/RotatingText";
+import ProjectsSection from "../components/ProjectsSection";
+
+
 import { useState, useEffect } from "react"
+
+const navItems = [
+  { label: 'About', href: '#about' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Resume', href: '#resume' }
+]
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('#about')
+  const [showNav, setShowNav] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
 
   const scrollToAbout = () => {
     const aboutSection = document.getElementById('about')
@@ -18,6 +31,18 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      
+      // Show nav when scrolling up, hide when scrolling down
+      if (currentScrollY < lastScrollY || currentScrollY < 100) {
+        setShowNav(true)
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setShowNav(false)
+      }
+      
+      setLastScrollY(currentScrollY)
+
+      // Active section tracking
       const sections = ['about', 'skills', 'projects', 'contact']
       const scrollPosition = window.scrollY + window.innerHeight / 2
 
@@ -35,31 +60,25 @@ export default function Home() {
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [lastScrollY])
 
   return (
     <div className="bg-black relative overflow-hidden">
       {/* Fixed background */}
-      <div className="fixed inset-0 w-full h-full z-0" style={{ opacity: 0.8 }}>
+      <div className="fixed inset-0 w-full h-full z-0 background-overlay">
         <LetterGlitch
           glitchSpeed={50}
-          centerVignette={true}
-          outerVignette={false}
+          centerVignette={false}
+          outerVignette={true}
           smooth={true}
         />
       </div>
-      
+
       {/* Main content wrapper */}
       <div className="relative z-10">
-        {/* Fixed PillNav */}
-        <div className="fixed top-0 left-0 right-0 z-50">
+        <div className={`fixed top-0 left-0 right-0 z-50 pt-4 px-4 transition-transform duration-300 ${showNav ? 'translate-y-0' : '-translate-y-full'}`}>
           <PillNav
-          items={[
-            { label: 'About', href: '#about' },
-            { label: 'Skills', href: '#skills' },
-            { label: 'Projects', href: '#projects' },
-            { label: 'Resume', href: '#resume' }
-          ]}
+          items={navItems}
           activeHref={activeSection}
           className="custom-nav"
           ease="power2.easeOut"
@@ -107,12 +126,14 @@ export default function Home() {
 
           <div>
             <div className="flex gap-4">
-              <button 
-                onClick={scrollToAbout}
-                className="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold rounded-full hover:scale-105 transition-transform duration-300"
+              <a 
+                href="https://github.com/Shubham-mohapatra"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold rounded-full hover:scale-105 transition-transform duration-300 inline-block"
               >
                 View My Work
-              </button>
+              </a>
               <button 
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-8 py-4 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-purple-900 transition-all duration-300"
@@ -135,21 +156,13 @@ export default function Home() {
       </div>
   <AboutSection />
       
+
+
   {/* Skills Section */}
-  <section id="skills" className="relative z-10 min-h-screen flex items-center justify-center px-6 py-20 bg-black">
-    <div className="max-w-6xl mx-auto text-center">
-      <h2 className="text-5xl font-bold text-white mb-8">Skills</h2>
-      <p className="text-xl text-gray-300">Skills section coming soon...</p>
-    </div>
-  </section>
+  <SkillsSection />
 
   {/* Projects Section */}
-  <section id="projects" className="relative z-10 min-h-screen flex items-center justify-center px-6 py-20 bg-black">
-    <div className="max-w-6xl mx-auto text-center">
-      <h2 className="text-5xl font-bold text-white mb-8">Projects</h2>
-      <p className="text-xl text-gray-300">Projects section coming soon...</p>
-    </div>
-  </section>
+  <ProjectsSection />
 
   {/* Footer with Contact */}
   <Footer />

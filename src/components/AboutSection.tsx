@@ -1,78 +1,48 @@
 "use client"
 
-// import { useEffect, useState } from "react"
+import { useRef } from "react"
 import ScrollAnimation from "./ScrollAnimation"
-import ProfileCard from "./ProfileCard"
+import TiltedCard from "./TiltedCard"
 
 
 const AboutSection = () => {
+  const containerRef = useRef<HTMLElement>(null)
+  
   return (
-    <section id="about" className="min-h-screen flex items-center justify-center px-6 py-20">
+    <section id="about" className="min-h-screen flex items-center justify-center px-6 py-20" ref={containerRef}>
       <div className="container mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Side - ProfileCard */}
           <ScrollAnimation animation="fade-left" delay={200}>
             <div className="flex justify-center lg:justify-center lg:pl-8">
-              <div className="scale-75">
-                <ProfileCard
-                  name=""
-                  title=""
-                  handle=""
-                  status=""
-                  contactText="Contact Me"
-                  avatarUrl="/photo.jpg"
-                  miniAvatarUrl="/photo.jpg"
-                  behindGradient="none"
-                  innerGradient="none"
-                  showBehindGradient={false}
-                  showUserInfo={false}
-                  enableTilt={true}
-                  enableMobileTilt={false}
-                  onContactClick={() => {
-                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                />
-              </div>
+              <TiltedCard
+                imageSrc="/profile.jpg"
+                altText="Shubham Mohapatra"
+                captionText=""
+                containerHeight="450px"
+                containerWidth="450px"
+                imageHeight="350px"
+                imageWidth="350px"
+                rotateAmplitude={12}
+                scaleOnHover={1.1}
+                showMobileWarning={false}
+                showTooltip={false}
+                displayOverlayContent={false}
+              />
             </div>
           </ScrollAnimation>
 
           <div className="text-left">
-            <ScrollAnimation animation="fade-right" delay={400}>
-              <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
-                About Me
-              </h2>
-            </ScrollAnimation>
-            <ScrollAnimation animation="fade-up" delay={800}>
-              <div className="text-lg text-gray-400 leading-relaxed space-y-4">
-                <p>
-                  I&apos;m a passionate full-stack developer who loves creating digital experiences 
-                  that blend creativity with functionality.
+            <ScrollAnimation animation="fade-up" delay={600}>
+              <div className="text-lg md:text-xl mb-6 space-y-6 leading-relaxed text-white">
+                <p className="font-bold">
+                  👋 Hey, I&apos;m Shubham Mohapatra — a full-stack developer and AI/ML enthusiast who loves building smart, meaningful digital experiences.
                 </p>
-                <p>
-                  With expertise in modern web technologies, I enjoy building applications 
-                  that make a difference and solve real-world problems.
+                <p className="font-semibold">
+                  I enjoy blending creativity with logic — crafting seamless UIs, scalable backends, and intelligent systems that learn and adapt.
                 </p>
-                <p>
-                  When I am not coding, you can find me exploring new technologies, 
-                  contributing to open source, or sharing knowledge with the developer community.
+                <p className="font-semibold">
+                  When I&apos;m not coding, I&apos;m exploring new tech trends or experimenting with data-driven ideas.
                 </p>
-              </div>
-            </ScrollAnimation>
-
-            {/* Tech Stack Icons */}
-            <ScrollAnimation animation="fade-scale" delay={1000}>
-              <div className="mt-8">
-                <h3 className="text-xl text-white mb-4">Technologies I work with:</h3>
-                <div className="flex flex-wrap gap-3">
-                  {['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'Three.js'].map((tech) => (
-                    <span 
-                      key={tech}
-                      className="px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-white text-sm hover:bg-white/20 transition-colors duration-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
               </div>
             </ScrollAnimation>
           </div>
