@@ -20,7 +20,7 @@ const Footer = () => {
     },
     { 
       icon: <Mail className="w-5 h-5" />, 
-      href: "shubhammohapatra094@gmail.com", 
+      href: "mailto:shubhammohapatra094@gmail.com", 
       label: "Email",
       color: "hover:text-[#EA4335] hover:drop-shadow-[0_0_10px_rgba(234,67,53,0.5)]"
     }
@@ -36,7 +36,7 @@ const Footer = () => {
           </p>
           
           <a 
-            href="shubhammohapatra094@gmail.com"
+            href="mailto:shubhammohapatra094@gmail.com"
             className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition-colors duration-300 mb-12"
           >
             <Mail className="w-5 h-5" />
