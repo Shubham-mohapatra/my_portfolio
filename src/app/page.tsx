@@ -7,7 +7,6 @@ import LetterGlitch from "../components/LetterGlitch";
 import RotatingText from "../components/RotatingText";
 import ProjectsSection from "../components/ProjectsSection";
 
-
 import { useState, useEffect } from "react"
 
 const navItems = [
@@ -90,82 +89,75 @@ export default function Home() {
           />
         </div>
       
-  {/* Hero Section */}
-  <div className="min-h-screen relative z-10">
-        {/* Hero content */}
-        <main className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 text-center">
-          <div>
-            <h1 className="text-6xl md:text-8xl font-extrabold text-white mb-4">
-            Shubham Mohapatra
-            </h1>
-          </div>
-          
-          <div>
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              <RotatingText 
-                texts={[
-                  "I'm a Developer",
-                  "I'm a Problem Solver",
-                  "I Build Amazing Apps"
-                ]}
-                rotationInterval={2000}
-                splitBy="lines"
-                staggerDuration={0}
-                initial={{ y: '100%', opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: '-100%', opacity: 0 }}
-              />
-            </h2>
-          </div>
-          
-          <div>
-            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mb-8">
-              Creating digital experiences that blend creativity with functionality
-            </p>
-          </div>
-
-          <div>
-            <div className="flex gap-4">
-              <a 
-                href="https://github.com/Shubham-mohapatra"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold rounded-full hover:scale-105 transition-transform duration-300 inline-block"
-              >
-                View My Work
-              </a>
-              <button 
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-4 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-purple-900 transition-all duration-300"
-              >
-                Contact Me
-              </button>
+        {/* Hero Section */}
+        <div className="min-h-screen relative z-10">
+          {/* Hero content */}
+          <main className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 text-center">
+            <div>
+              <h1 className="text-6xl md:text-8xl font-extrabold text-white mb-4">
+              Shubham Mohapatra
+              </h1>
             </div>
-          </div>
-        </main>
-        <div>
-          <div 
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer z-20"
-            onClick={scrollToAbout}
-          >
-            <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
+            
+            <div>
+              <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                <RotatingText 
+                  texts={[
+                    "I'm a Developer",
+                    "I'm a Problem Solver",
+                    "I Build Amazing Apps"
+                  ]}
+                  rotationInterval={2000}
+                  splitBy="lines"
+                  staggerDuration={0}
+                  initial={{ y: '100%', opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: '-100%', opacity: 0 }}
+                />
+              </h2>
+            </div>
+            
+            <div>
+              <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mb-8">
+                Creating digital experiences that blend creativity with functionality
+              </p>
+            </div>
+
+            <div>
+              <div className="flex gap-4">
+                <a 
+                  href="https://github.com/Shubham-mohapatra"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold rounded-full hover:scale-105 transition-transform duration-300 inline-block"
+                >
+                  View My Work
+                </a>
+                <button 
+                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="px-8 py-4 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-purple-900 transition-all duration-300"
+                >
+                  Contact Me
+                </button>
+              </div>
+            </div>
+          </main>
+          <div>
+            <div 
+              className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer z-20"
+              onClick={scrollToAbout}
+            >
+              <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
+                <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-  <AboutSection />
-      
 
-
-  {/* Skills Section */}
-  <SkillsSection />
-
-  {/* Projects Section */}
-  <ProjectsSection />
-
-  {/* Footer with Contact */}
-  <Footer />
+        <AboutSection />
+        <SkillsSection />
+        <ProjectsSection />
+        <Footer />
       </div>
     </div>
   );
