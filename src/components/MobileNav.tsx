@@ -11,22 +11,22 @@ const MobileDock = ({ activeSection }: MobileDockProps) => {
   const navItems = [
     {
       title: 'Home',
-      icon: <Home className='h-full w-full text-neutral-600 dark:text-neutral-300' />,
+      icon: <Home className='h-full w-full text-neutral-300' />,
       href: '#about',
     },
     {
       title: 'Skills',
-      icon: <Code2 className='h-full w-full text-neutral-600 dark:text-neutral-300' />,
+      icon: <Code2 className='h-full w-full text-neutral-300' />,
       href: '#skills',
     },
     {
       title: 'Projects',
-      icon: <Briefcase className='h-full w-full text-neutral-600 dark:text-neutral-300' />,
+      icon: <Briefcase className='h-full w-full text-neutral-300' />,
       href: '#projects',
     },
     {
       title: 'Resume',
-      icon: <FileText className='h-full w-full text-neutral-600 dark:text-neutral-300' />,
+      icon: <FileText className='h-full w-full text-neutral-300' />,
       href: '/resume.pdf',
     },
   ];
@@ -43,8 +43,12 @@ const MobileDock = ({ activeSection }: MobileDockProps) => {
   };
 
   return (
-    <div className='md:hidden fixed bottom-2 left-1/2 -translate-x-1/2 z-50 max-w-full'>
-      <Dock className='items-end pb-3'>
+    <div className='md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-sm px-4'>
+      <Dock 
+        className='items-end pb-3 bg-black/80 backdrop-blur-xl border border-white/10 rounded-2xl' 
+        magnification={60} 
+        distance={100}
+      >
         {navItems.map((item, idx) => {
           const isActive = activeSection === item.href;
           return (
@@ -52,11 +56,11 @@ const MobileDock = ({ activeSection }: MobileDockProps) => {
               <DockItem
                 className={`aspect-square rounded-full ${
                   isActive 
-                    ? 'bg-white dark:bg-white' 
-                    : 'bg-gray-200 dark:bg-neutral-800'
-                } cursor-pointer transition-colors`}
+                    ? 'bg-white/20' 
+                    : 'bg-transparent hover:bg-white/10'
+                } transition-colors duration-200`}
               >
-                <DockLabel>{item.title}</DockLabel>
+                <DockLabel className="text-white bg-black/90 border-white/10">{item.title}</DockLabel>
                 <DockIcon>{item.icon}</DockIcon>
               </DockItem>
             </div>
