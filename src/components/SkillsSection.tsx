@@ -1,13 +1,15 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Grid, LayoutList, X } from "lucide-react"
 import ScrollAnimation from "./ScrollAnimation"
 import DockSkills, { skillsData, Skill } from "./DockSkills"
+import VariableProximity from "./VariableProximity"
 
 const SkillsSection = () => {
   const [isExpanded, setIsExpanded] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   // Group skills by category
   const categories = skillsData.reduce((acc, skill) => {
@@ -23,9 +25,20 @@ const SkillsSection = () => {
       <div className="container mx-auto max-w-7xl">
         <ScrollAnimation animation="fade-up" delay={200}>
           <div className="text-center mb-12">
-            <h2 className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-tight">
-              Tech Stack.
-            </h2>
+            <div 
+              ref={containerRef}
+              className="mb-4 relative inline-block"
+            >
+              <VariableProximity
+                label="Tech Stack."
+                className="text-5xl md:text-7xl font-bold text-white tracking-tight cursor-default"
+                fromFontVariationSettings="'wght' 700, 'opsz' 9"
+                toFontVariationSettings="'wght' 1000, 'opsz' 40"
+                containerRef={containerRef as React.RefObject<HTMLElement>}
+                radius={100}
+                falloff="linear"
+              />
+            </div>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               Technologies and tools I work with to build innovative solutions.
             </p>

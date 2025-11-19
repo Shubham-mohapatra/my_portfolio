@@ -1,12 +1,12 @@
 import { forwardRef, useMemo, useRef, useEffect } from 'react';
-import { motion } from 'motion/react';
-import './VariableProximity.css';
+import { motion } from 'framer-motion';
 
-function useAnimationFrame(callback) {
+
+function useAnimationFrame(callback: (time: number) => void) {
   useEffect(() => {
-    let frameId;
-    const loop = () => {
-      callback();
+    let frameId: number;
+    const loop = (time: number) => {
+      callback(time);
       frameId = requestAnimationFrame(loop);
     };
     frameId = requestAnimationFrame(loop);
@@ -14,11 +14,11 @@ function useAnimationFrame(callback) {
   }, [callback]);
 }
 
-function useMousePositionRef(containerRef) {
+function useMousePositionRef(containerRef: React.RefObject<HTMLElement>) {
   const positionRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    const updatePosition = (x, y) => {
+    const updatePosition = (x: number, y: number) => {
       if (containerRef?.current) {
         const rect = containerRef.current.getBoundingClientRect();
         positionRef.current = { x: x - rect.left, y: y - rect.top };
@@ -27,8 +27,8 @@ function useMousePositionRef(containerRef) {
       }
     };
 
-    const handleMouseMove = ev => updatePosition(ev.clientX, ev.clientY);
-    const handleTouchMove = ev => {
+    const handleMouseMove = (ev: MouseEvent) => updatePosition(ev.clientX, ev.clientY);
+    const handleTouchMove = (ev: TouchEvent) => {
       const touch = ev.touches[0];
       updatePosition(touch.clientX, touch.clientY);
     };
@@ -44,7 +44,16 @@ function useMousePositionRef(containerRef) {
   return positionRef;
 }
 
-const VariableProximity = forwardRef((props, ref) => {
+interface VariableProximityProps extends React.HTMLAttributes<HTMLSpanElement> {
+  label: string;
+  fromFontVariationSettings: string;
+  toFontVariationSettings: string;
+  containerRef: React.RefObject<HTMLElement>;
+  radius?: number;
+  falloff?: 'linear' | 'exponential' | 'gaussian';
+}
+
+const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((props, ref) => {
   const {
     label,
     fromFontVariationSettings,
@@ -58,13 +67,13 @@ const VariableProximity = forwardRef((props, ref) => {
     ...restProps
   } = props;
 
-  const letterRefs = useRef([]);
-  const interpolatedSettingsRef = useRef([]);
+  const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const interpolatedSettingsRef = useRef<string[]>([]);
   const mousePositionRef = useMousePositionRef(containerRef);
-  const lastPositionRef = useRef({ x: null, y: null });
+  const lastPositionRef = useRef({ x: null as number | null, y: null as number | null });
 
   const parsedSettings = useMemo(() => {
-    const parseSettings = settingsStr =>
+    const parseSettings = (settingsStr: string) =>
       new Map(
         settingsStr
           .split(',')
@@ -85,9 +94,9 @@ const VariableProximity = forwardRef((props, ref) => {
     }));
   }, [fromFontVariationSettings, toFontVariationSettings]);
 
-  const calculateDistance = (x1, y1, x2, y2) => Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+  const calculateDistance = (x1: number, y1: number, x2: number, y2: number) => Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
 
-  const calculateFalloff = distance => {
+  const calculateFalloff = (distance: number) => {
     const norm = Math.min(Math.max(1 - distance / radius, 0), 1);
     switch (falloff) {
       case 'exponential':
@@ -100,14 +109,17 @@ const VariableProximity = forwardRef((props, ref) => {
     }
   };
 
+  const currentFalloffsRef = useRef<number[]>([]);
+
   useAnimationFrame(() => {
     if (!containerRef?.current) return;
     const containerRect = containerRef.current.getBoundingClientRect();
     const { x, y } = mousePositionRef.current;
-    if (lastPositionRef.current.x === x && lastPositionRef.current.y === y) {
-      return;
+
+    // Initialize current falloffs if needed
+    if (currentFalloffsRef.current.length !== letterRefs.current.length) {
+      currentFalloffsRef.current = new Array(letterRefs.current.length).fill(0);
     }
-    lastPositionRef.current = { x, y };
 
     letterRefs.current.forEach((letterRef, index) => {
       if (!letterRef) return;
@@ -117,21 +129,27 @@ const VariableProximity = forwardRef((props, ref) => {
       const letterCenterY = rect.top + rect.height / 2 - containerRect.top;
 
       const distance = calculateDistance(
-        mousePositionRef.current.x,
-        mousePositionRef.current.y,
+        x,
+        y,
         letterCenterX,
         letterCenterY
       );
 
-      if (distance >= radius) {
-        letterRef.style.fontVariationSettings = fromFontVariationSettings;
-        return;
+      const targetFalloff = distance >= radius ? 0 : calculateFalloff(distance);
+      
+      // Smooth interpolation (lerp)
+      const currentFalloff = currentFalloffsRef.current[index];
+      const newFalloff = currentFalloff + (targetFalloff - currentFalloff) * 0.1;
+      currentFalloffsRef.current[index] = newFalloff;
+
+      // Optimization: Skip update if change is negligible
+      if (Math.abs(newFalloff - currentFalloff) < 0.001 && Math.abs(targetFalloff - newFalloff) < 0.001) {
+         return; 
       }
 
-      const falloffValue = calculateFalloff(distance);
       const newSettings = parsedSettings
         .map(({ axis, fromValue, toValue }) => {
-          const interpolatedValue = fromValue + (toValue - fromValue) * falloffValue;
+          const interpolatedValue = fromValue + (toValue - fromValue) * newFalloff;
           return `'${axis}' ${interpolatedValue}`;
         })
         .join(', ');

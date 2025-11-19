@@ -1,8 +1,11 @@
 "use client"
 
 import { Github, Linkedin, Mail } from 'lucide-react'
+import VariableProximity from "./VariableProximity"
+import { useRef } from "react"
 
 const Footer = () => {
+  const containerRef = useRef<HTMLDivElement>(null)
   const currentYear = new Date().getFullYear()
 
   const socialLinks = [
@@ -30,7 +33,20 @@ const Footer = () => {
     <footer id="contact" className="bg-transparent border-t border-white/10 pt-16 pb-8">
       <div className="container mx-auto max-w-6xl px-6">
         <div className="flex flex-col items-center text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Get in Touch</h2>
+          <div 
+            ref={containerRef}
+            className="mb-6 relative inline-block"
+          >
+            <VariableProximity
+              label="Get in Touch"
+              className="text-3xl md:text-4xl font-bold text-white tracking-tight cursor-default"
+              fromFontVariationSettings="'wght' 700, 'opsz' 9"
+              toFontVariationSettings="'wght' 1000, 'opsz' 40"
+              containerRef={containerRef as React.RefObject<HTMLElement>}
+              radius={100}
+              falloff="linear"
+            />
+          </div>
           <p className="text-gray-300 max-w-xl mb-8 leading-relaxed text-lg">
             I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
           </p>

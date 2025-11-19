@@ -1,98 +1,132 @@
 "use client"
 
 import ScrollAnimation from "./ScrollAnimation"
-import { useState } from "react"
+import { ArrowUpRight, Github } from 'lucide-react'
+import VariableProximity from "./VariableProximity"
+import SpotlightCard from "./SpotlightCard"
+import { useRef } from "react"
 
 const ProjectsSection = () => {
+  const containerRef = useRef<HTMLDivElement>(null)
   const projects = [
     {
-      title: "RAG Chatbot with Gemini AI",
+      title: "RAG Chatbot",
+      subtitle: "with Gemini AI",
       description: "A production-ready RAG chatbot capable of multi-format document ingestion (PDF, DOCX, HTML). Features persistent storage and a scalable FastAPI backend.",
-      tags: ["Gemini AI", "ChromaDB", "FastAPI", "React", "RAG"],
+      tags: ["Gemini AI", "ChromaDB", "FastAPI", "React"],
       links: {
         demo: "#",
-        github: "#"
+        github: "https://github.com/Shubham-mohapatra/RAG-chatbot"
       },
-      image: "https://placehold.co/600x400/1a1a1a/ffffff?text=RAG+Chatbot",
-      stats: "2-3s Response Time"
+      image: "https://placehold.co/800x600/1a1a1a/ffffff?text=RAG+Chatbot",
+      stats: "2-3s Response"
     },
     {
       title: "AgroBuddy",
+      subtitle: "AI Crop Disease Detection",
       description: "AI-powered mobile app for crop disease detection using CNNs. Achieved 90% accuracy on 20K+ images, helping farmers reduce crop loss by 25%.",
-      tags: ["Android", "Java", "CNN", "TensorFlow", "Mobile"],
+      tags: ["Android", "Java", "CNN", "TensorFlow"],
       links: {
         demo: "#",
-        github: "#"
+        github: "https://github.com/Shubham-mohapatra/AgroBuddy"
       },
-      image: "https://placehold.co/600x400/1a1a1a/ffffff?text=AgroBuddy",
+      image: "https://placehold.co/800x600/1a1a1a/ffffff?text=AgroBuddy",
       stats: "90% Accuracy"
     }
   ]
 
   return (
-    <section id="projects" className="relative z-10 min-h-screen flex items-center justify-center px-6 py-20">
-      <div className="container mx-auto max-w-7xl">
-        <ScrollAnimation animation="fade-up" delay={200}>
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
-              Featured Projects
-            </h2>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Showcasing my journey in building impactful solutions
-            </p>
+    <section id="projects" className="relative z-10 min-h-screen py-32 overflow-hidden">
+      <div className="container mx-auto px-6 max-w-7xl">
+        <ScrollAnimation animation="fade-up" className="flex flex-col items-center text-center">
+          <div 
+            ref={containerRef}
+            className="mb-16 relative"
+          >
+            <VariableProximity
+              label="Featured Projects"
+              className="text-5xl md:text-7xl font-bold text-white tracking-tight cursor-default"
+              fromFontVariationSettings="'wght' 700, 'opsz' 9"
+              toFontVariationSettings="'wght' 1000, 'opsz' 40"
+              containerRef={containerRef as React.RefObject<HTMLElement>}
+              radius={100}
+              falloff="linear"
+            />
           </div>
+          <p className="text-2xl md:text-3xl text-gray-400 max-w-3xl leading-relaxed mb-32">
+            Forging raw ideas into polished digital realities. <br />
+            <span className="text-purple-400">A curated selection of my technical endeavors.</span>
+          </p>
         </ScrollAnimation>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="flex flex-col gap-32 md:gap-48">
           {projects.map((project, index) => (
-            <ScrollAnimation key={index} animation="fade-up" delay={300 + index * 200}>
-              <div className="group relative bg-white/[0.02] backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:border-purple-500/50 transition-all duration-500">
-                {/* Image Placeholder / Gradient */}
-                <div className="h-48 bg-gradient-to-br from-purple-900/20 to-pink-900/20 group-hover:from-purple-900/40 group-hover:to-pink-900/40 transition-all duration-500 relative overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center text-white/20 text-6xl font-bold group-hover:scale-110 transition-transform duration-500">
-                    {project.title[0]}
+            <div key={index} className={`flex flex-col md:flex-row gap-12 md:gap-24 items-center ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
+              
+              {/* Text Content */}
+              <div className="flex-1 space-y-8">
+                <ScrollAnimation animation="fade-up" delay={200}>
+                  <div className="flex items-center gap-4 mb-4">
+                    <span className="text-purple-400 font-mono text-sm tracking-widest uppercase">0{index + 1}</span>
+                    <div className="h-px w-12 bg-purple-500/30" />
                   </div>
-                </div>
-
-                <div className="p-8">
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-2xl font-bold text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-pink-500 group-hover:to-purple-500 transition-all duration-300">
-                      {project.title}
-                    </h3>
-                    <span className="text-xs font-mono text-pink-400 border border-pink-500/30 px-2 py-1 rounded-full">
-                      {project.stats}
+                  
+                  <h3 className="text-5xl md:text-7xl font-bold text-white leading-tight group cursor-default">
+                    {project.title}
+                    <span className="block text-2xl md:text-3xl text-gray-500 font-normal mt-2 group-hover:text-purple-400 transition-colors duration-300">
+                      {project.subtitle}
                     </span>
-                  </div>
+                  </h3>
+                </ScrollAnimation>
 
-                  <p className="text-gray-400 mb-6 line-clamp-3">
+                <ScrollAnimation animation="fade-up" delay={300}>
+                  <p className="text-xl text-gray-400 leading-relaxed max-w-lg">
                     {project.description}
                   </p>
+                </ScrollAnimation>
 
-                  <div className="flex flex-wrap gap-2 mb-8">
+                <ScrollAnimation animation="fade-up" delay={400}>
+                  <div className="flex flex-wrap gap-3">
                     {project.tags.map((tag) => (
-                      <span key={tag} className="text-sm text-gray-300 bg-white/5 px-3 py-1 rounded-full">
+                      <span key={tag} className="px-4 py-2 rounded-full border border-white/10 text-sm text-gray-300 hover:border-purple-500/50 hover:text-white transition-colors duration-300">
                         {tag}
                       </span>
                     ))}
                   </div>
+                </ScrollAnimation>
 
-                  <div className="flex gap-4">
-                    <a href={project.links.github} className="text-white hover:text-pink-400 transition-colors font-medium flex items-center gap-2">
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
-                      </svg>
-                      Code
-                    </a>
-                    <a href={project.links.demo} className="text-white hover:text-pink-400 transition-colors font-medium flex items-center gap-2">
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
+                <ScrollAnimation animation="fade-up" delay={500}>
+                  <div className="flex items-center gap-8 pt-4">
+                    <a href={project.links.demo} className="flex items-center gap-2 text-white hover:text-purple-400 transition-colors text-lg font-medium group">
                       Live Demo
+                      <ArrowUpRight className="w-5 h-5 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
+                    </a>
+                    <a href={project.links.github} className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-lg font-medium">
+                      <Github className="w-5 h-5" />
+                      Source
                     </a>
                   </div>
-                </div>
+                </ScrollAnimation>
               </div>
-            </ScrollAnimation>
+
+              {/* Image Content */}
+              <div className="flex-1 w-full">
+                <ScrollAnimation animation={index % 2 === 0 ? "fade-right" : "fade-left"} delay={200}>
+                  <SpotlightCard className="relative group cursor-pointer rounded-2xl overflow-hidden p-0 bg-transparent">
+                      <div className="absolute -inset-4 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                      <div className="relative aspect-[4/3] md:aspect-[16/10]">
+                        <div className="absolute inset-0 bg-purple-900/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                        <img 
+                          src={project.image} 
+                          alt={project.title}
+                          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                        />
+                      </div>
+                  </SpotlightCard>
+                </ScrollAnimation>
+              </div>
+
+            </div>
           ))}
         </div>
       </div>

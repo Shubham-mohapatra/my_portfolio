@@ -221,7 +221,8 @@ const PillNav = ({
     href.startsWith('//') ||
     href.startsWith('mailto:') ||
     href.startsWith('tel:') ||
-    href.startsWith('#');
+    href.startsWith('#') ||
+    /\.(pdf|doc|docx|zip|jpg|jpeg|png|gif)$/i.test(href); // Treat file paths as external
 
   const isRouterLink = href => href && !isExternalLink(href);
 

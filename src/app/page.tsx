@@ -7,19 +7,21 @@ import LetterGlitch from "../components/LetterGlitch";
 import RotatingText from "../components/RotatingText";
 import ProjectsSection from "../components/ProjectsSection";
 
-import { useState, useEffect } from "react"
+import VariableProximity from "../components/VariableProximity";
+import { useState, useEffect, useRef } from "react"
 
 const navItems = [
   { label: 'About', href: '#about' },
   { label: 'Skills', href: '#skills' },
   { label: 'Projects', href: '#projects' },
-  { label: 'Resume', href: '#resume' }
+  { label: 'Resume', href: '/resume.pdf' }
 ]
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('#about')
   const [showNav, setShowNav] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const scrollToAbout = () => {
     const aboutSection = document.getElementById('about')
@@ -51,8 +53,21 @@ export default function Home() {
           const { offsetTop, offsetHeight } = element
           if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
             setActiveSection(`#${section}`)
+            // Update URL without page reload
+            const newUrl = `/${section}`
+            if (window.location.pathname !== newUrl) {
+              window.history.pushState({}, '', newUrl)
+            }
             break
           }
+        }
+      }
+      
+      // If at the top, set to home
+      if (window.scrollY < 100) {
+        setActiveSection('#about')
+        if (window.location.pathname !== '/') {
+          window.history.pushState({}, '', '/')
         }
       }
     }
@@ -94,9 +109,20 @@ export default function Home() {
           {/* Hero content */}
           <main className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 text-center">
             <div>
-              <h1 className="text-6xl md:text-8xl font-extrabold text-white mb-4">
-              Shubham Mohapatra
-              </h1>
+            <div 
+              ref={containerRef}
+              className="mb-4 relative inline-block"
+            >
+              <VariableProximity
+                label="Shubham Mohapatra"
+                className="text-6xl md:text-8xl font-extrabold text-white tracking-tight cursor-default"
+                fromFontVariationSettings="'wght' 800, 'opsz' 9"
+                toFontVariationSettings="'wght' 1000, 'opsz' 40"
+                containerRef={containerRef as React.RefObject<HTMLElement>}
+                radius={100}
+                falloff="linear"
+              />
+            </div>
             </div>
             
             <div>
