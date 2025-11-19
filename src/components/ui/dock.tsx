@@ -78,7 +78,7 @@ function useDock() {
 function Dock({
   children,
   className,
-  spring = { mass: 0.1, stiffness: 150, damping: 12 },
+  spring = { mass: 0.1, stiffness: 100, damping: 15 }, // Smoother spring config
   magnification = DEFAULT_MAGNIFICATION,
   distance = DEFAULT_DISTANCE,
   panelHeight = DEFAULT_PANEL_HEIGHT,
@@ -107,6 +107,15 @@ function Dock({
           mouseX.set(pageX);
         }}
         onMouseLeave={() => {
+          isHovered.set(0);
+          mouseX.set(Infinity);
+        }}
+        // Add touch handlers for mobile swipe
+        onTouchMove={(e) => {
+          isHovered.set(1);
+          mouseX.set(e.touches[0].clientX);
+        }}
+        onTouchEnd={() => {
           isHovered.set(0);
           mouseX.set(Infinity);
         }}

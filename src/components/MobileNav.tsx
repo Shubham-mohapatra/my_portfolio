@@ -46,8 +46,8 @@ const MobileDock = ({ activeSection }: MobileDockProps) => {
     <div className='md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-sm px-4'>
       <Dock 
         className='items-end pb-3 bg-black/80 backdrop-blur-xl border border-white/10 rounded-2xl' 
-        magnification={60} 
-        distance={100}
+        magnification={70} 
+        distance={120}
       >
         {navItems.map((item, idx) => {
           const isActive = activeSection === item.href;
