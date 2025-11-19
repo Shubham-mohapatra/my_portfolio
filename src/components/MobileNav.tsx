@@ -27,7 +27,7 @@ const MobileDock = ({ activeSection }: MobileDockProps) => {
     {
       title: 'Resume',
       icon: <FileText className='h-full w-full text-neutral-300' />,
-      href: '/resume.pdf',
+      href: '#',
     },
   ];
 

@@ -15,7 +15,7 @@ const navItems = [
   { label: 'About', href: '#about' },
   { label: 'Skills', href: '#skills' },
   { label: 'Projects', href: '#projects' },
-  { label: 'Resume', href: '/resume.pdf' }
+  { label: 'Resume', href: '#' }
 ]
 
 export default function Home() {
