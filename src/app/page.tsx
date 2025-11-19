@@ -91,7 +91,8 @@ export default function Home() {
 
       {/* Main content wrapper */}
       <div className="relative z-10">
-        <div className={`fixed top-0 left-0 right-0 z-50 pt-4 px-4 transition-transform duration-300 ${showNav ? 'translate-y-0' : '-translate-y-full'}`}>
+        {/* Desktop Navigation - Hidden on mobile */}
+        <div className={`hidden md:block fixed top-0 left-0 right-0 z-50 pt-4 px-4 transition-transform duration-300 ${showNav ? 'translate-y-0' : '-translate-y-full'}`}>
           <PillNav
           items={navItems}
           activeHref={activeSection}
