@@ -1,15 +1,34 @@
-import { Home, Code2, Briefcase, FileText } from 'lucide-react';
+'use client';
 
-interface MobileNavProps {
+import { Home, Code2, Briefcase, FileText } from 'lucide-react';
+import { Dock, DockIcon, DockItem, DockLabel } from '@/components/ui/dock';
+
+interface MobileDockProps {
   activeSection: string;
 }
 
-const MobileNav = ({ activeSection }: MobileNavProps) => {
+const MobileDock = ({ activeSection }: MobileDockProps) => {
   const navItems = [
-    { label: 'Home', href: '#about', icon: Home },
-    { label: 'Skills', href: '#skills', icon: Code2 },
-    { label: 'Projects', href: '#projects', icon: Briefcase },
-    { label: 'Resume', href: '/resume.pdf', icon: FileText }
+    {
+      title: 'Home',
+      icon: <Home className='h-full w-full text-neutral-600 dark:text-neutral-300' />,
+      href: '#about',
+    },
+    {
+      title: 'Skills',
+      icon: <Code2 className='h-full w-full text-neutral-600 dark:text-neutral-300' />,
+      href: '#skills',
+    },
+    {
+      title: 'Projects',
+      icon: <Briefcase className='h-full w-full text-neutral-600 dark:text-neutral-300' />,
+      href: '#projects',
+    },
+    {
+      title: 'Resume',
+      icon: <FileText className='h-full w-full text-neutral-600 dark:text-neutral-300' />,
+      href: '/resume.pdf',
+    },
   ];
 
   const handleClick = (href: string) => {
@@ -24,35 +43,28 @@ const MobileNav = ({ activeSection }: MobileNavProps) => {
   };
 
   return (
-    <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
-      <div className="bg-black/80 backdrop-blur-xl border border-white/10 rounded-full px-6 py-3 shadow-2xl">
-        <div className="flex items-center gap-6">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeSection === item.href;
-            
-            return (
-              <button
-                key={item.href}
-                onClick={() => handleClick(item.href)}
-                className={`relative p-3 rounded-full transition-all duration-300 ${
+    <div className='md:hidden fixed bottom-2 left-1/2 -translate-x-1/2 z-50 max-w-full'>
+      <Dock className='items-end pb-3'>
+        {navItems.map((item, idx) => {
+          const isActive = activeSection === item.href;
+          return (
+            <div key={idx} onClick={() => handleClick(item.href)}>
+              <DockItem
+                className={`aspect-square rounded-full ${
                   isActive 
-                    ? 'bg-white text-black scale-110' 
-                    : 'text-white/60 hover:text-white hover:bg-white/10'
-                }`}
-                aria-label={item.label}
+                    ? 'bg-white dark:bg-white' 
+                    : 'bg-gray-200 dark:bg-neutral-800'
+                } cursor-pointer transition-colors`}
               >
-                <Icon className="w-5 h-5" />
-                {isActive && (
-                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-white rounded-full" />
-                )}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-    </nav>
+                <DockLabel>{item.title}</DockLabel>
+                <DockIcon>{item.icon}</DockIcon>
+              </DockItem>
+            </div>
+          );
+        })}
+      </Dock>
+    </div>
   );
 };
 
-export default MobileNav;
+export default MobileDock;
