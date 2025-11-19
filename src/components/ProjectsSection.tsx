@@ -5,6 +5,7 @@ import { ArrowUpRight, Github } from 'lucide-react'
 import VariableProximity from "./VariableProximity"
 import SpotlightCard from "./SpotlightCard"
 import { useRef } from "react"
+import ScrollReveal from "./ScrollReveal"
 
 const ProjectsSection = () => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -53,10 +54,16 @@ const ProjectsSection = () => {
               falloff="linear"
             />
           </div>
-          <p className="text-2xl md:text-3xl text-gray-400 max-w-3xl leading-relaxed mb-32">
-            Forging raw ideas into polished digital realities. <br />
-            <span className="text-purple-400">A curated selection of my technical endeavors.</span>
-          </p>
+          <ScrollReveal 
+            baseOpacity={0.2}
+            enableBlur={true}
+            baseRotation={2}
+            blurStrength={6}
+            containerClassName="mb-32"
+            textClassName="text-2xl md:text-3xl text-gray-400 max-w-3xl leading-relaxed"
+          >
+            Forging raw ideas into polished digital realities. A curated selection of my technical endeavors.
+          </ScrollReveal>
         </ScrollAnimation>
 
         <div className="flex flex-col gap-32 md:gap-48">
@@ -80,9 +87,16 @@ const ProjectsSection = () => {
                 </ScrollAnimation>
 
                 <ScrollAnimation animation="fade-up" delay={300}>
-                  <p className="text-xl text-gray-400 leading-relaxed max-w-lg">
+                  <ScrollReveal 
+                    baseOpacity={0.2}
+                    enableBlur={true}
+                    baseRotation={1}
+                    blurStrength={5}
+                    containerClassName=""
+                    textClassName="text-xl text-gray-400 leading-relaxed max-w-lg"
+                  >
                     {project.description}
-                  </p>
+                  </ScrollReveal>
                 </ScrollAnimation>
 
                 <ScrollAnimation animation="fade-up" delay={400}>

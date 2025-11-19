@@ -3,6 +3,7 @@
 import { Github, Linkedin, Mail } from 'lucide-react'
 import VariableProximity from "./VariableProximity"
 import { useRef } from "react"
+import ScrollReveal from "./ScrollReveal"
 
 const Footer = () => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -47,9 +48,16 @@ const Footer = () => {
               falloff="linear"
             />
           </div>
-          <p className="text-gray-300 max-w-xl mb-8 leading-relaxed text-lg">
+          <ScrollReveal 
+            baseOpacity={0.3}
+            enableBlur={true}
+            baseRotation={1}
+            blurStrength={5}
+            containerClassName="mb-8"
+            textClassName="text-gray-300 max-w-xl leading-relaxed text-lg"
+          >
             I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
-          </p>
+          </ScrollReveal>
           
           <a 
             href="mailto:shubhammohapatra094@gmail.com"

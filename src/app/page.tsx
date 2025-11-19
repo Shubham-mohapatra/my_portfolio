@@ -8,6 +8,7 @@ import RotatingText from "../components/RotatingText";
 import ProjectsSection from "../components/ProjectsSection";
 
 import VariableProximity from "../components/VariableProximity";
+import MobileNav from "../components/MobileNav";
 import { useState, useEffect, useRef } from "react"
 
 const navItems = [
@@ -185,6 +186,9 @@ export default function Home() {
         <ProjectsSection />
         <Footer />
       </div>
+      
+      {/* Mobile Bottom Navigation */}
+      <MobileNav activeSection={activeSection} />
     </div>
   );
 }

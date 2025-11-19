@@ -3,6 +3,7 @@
 import { useRef } from "react"
 import ScrollAnimation from "./ScrollAnimation"
 import TiltedCard from "./TiltedCard"
+import ScrollReveal from "./ScrollReveal"
 
 
 const AboutSection = () => {
@@ -33,16 +34,37 @@ const AboutSection = () => {
 
           <div className="text-left">
             <ScrollAnimation animation="fade-up" delay={600}>
-              <div className="text-lg md:text-xl mb-6 space-y-6 leading-relaxed text-white">
-                <p className="font-bold">
-                  👋 Hey, I&apos;m Shubham Mohapatra — a full-stack developer and AI/ML enthusiast who loves building smart, meaningful digital experiences.
-                </p>
-                <p className="font-semibold">
+              <div className="text-sm md:text-base mb-6 space-y-6 leading-relaxed text-white">
+                <ScrollReveal 
+                  baseOpacity={0.2}
+                  enableBlur={true}
+                  baseRotation={2}
+                  blurStrength={6}
+                  containerClassName="mb-4"
+                  textClassName="font-bold text-sm md:text-base"
+                >
+                  👋 Hey, I'm Shubham Mohapatra — a full-stack developer and AI/ML enthusiast who loves building smart, meaningful digital experiences.
+                </ScrollReveal>
+                <ScrollReveal 
+                  baseOpacity={0.2}
+                  enableBlur={true}
+                  baseRotation={2}
+                  blurStrength={6}
+                  containerClassName="mb-4"
+                  textClassName="font-semibold text-sm md:text-base"
+                >
                   I enjoy blending creativity with logic — crafting seamless UIs, scalable backends, and intelligent systems that learn and adapt.
-                </p>
-                <p className="font-semibold">
-                  When I&apos;m not coding, I&apos;m exploring new tech trends or experimenting with data-driven ideas.
-                </p>
+                </ScrollReveal>
+                <ScrollReveal 
+                  baseOpacity={0.2}
+                  enableBlur={true}
+                  baseRotation={2}
+                  blurStrength={6}
+                  containerClassName="mb-4"
+                  textClassName="font-semibold text-sm md:text-base"
+                >
+                  When I'm not coding, I'm exploring new tech trends or experimenting with data-driven ideas.
+                </ScrollReveal>
               </div>
             </ScrollAnimation>
           </div>

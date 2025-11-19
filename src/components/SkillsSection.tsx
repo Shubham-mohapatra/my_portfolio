@@ -6,6 +6,7 @@ import { Grid, LayoutList, X } from "lucide-react"
 import ScrollAnimation from "./ScrollAnimation"
 import DockSkills, { skillsData, Skill } from "./DockSkills"
 import VariableProximity from "./VariableProximity"
+import ScrollReveal from "./ScrollReveal"
 
 const SkillsSection = () => {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -39,9 +40,16 @@ const SkillsSection = () => {
                 falloff="linear"
               />
             </div>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            <ScrollReveal 
+              baseOpacity={0.3}
+              enableBlur={true}
+              baseRotation={1}
+              blurStrength={5}
+              containerClassName=""
+              textClassName="text-xl text-gray-400 max-w-2xl mx-auto"
+            >
               Technologies and tools I work with to build innovative solutions.
-            </p>
+            </ScrollReveal>
           </div>
         </ScrollAnimation>
 
