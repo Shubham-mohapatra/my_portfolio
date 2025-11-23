@@ -7,6 +7,7 @@ import ScrollAnimation from "./ScrollAnimation"
 import DockSkills, { skillsData, Skill } from "./DockSkills"
 import VariableProximity from "./VariableProximity"
 import ScrollReveal from "./ScrollReveal"
+import Image from "next/image"
 
 const SkillsSection = () => {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -91,12 +92,13 @@ const SkillsSection = () => {
                           key={skill.name}
                           className="group flex flex-col items-center justify-center gap-3"
                         >
-                          <div className="w-20 h-20 md:w-24 md:h-24 p-2 transition-all duration-300 flex items-center justify-center group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]">
+                          <div className="w-20 h-20 md:w-24 md:h-24 p-2 transition-all duration-300 flex items-center justify-center group-hover:scale-110 group-hover:drop-shadow-[0_0_15px_rgba(168,85,247,0.5)] relative">
                             {typeof skill.icon === 'string' ? (
-                              <img 
+                              <Image 
                                 src={skill.icon} 
                                 alt={skill.name} 
-                                className="w-full h-full object-contain opacity-90 group-hover:opacity-100 transition-all duration-300"
+                                fill
+                                className="object-contain opacity-90 group-hover:opacity-100 transition-all duration-300 p-2"
                               />
                             ) : (
                               <div className="w-full h-full p-1 text-gray-300 group-hover:text-white transition-colors">{skill.icon}</div>

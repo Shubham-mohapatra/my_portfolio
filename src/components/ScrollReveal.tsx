@@ -55,14 +55,15 @@ const ScrollReveal = ({
       el,
       { transformOrigin: '0% 50%', rotate: baseRotation },
       {
-        ease: 'none',
+        ease: 'power2.out',
+        duration: 1,
         rotate: 0,
         scrollTrigger: {
           trigger: el,
           scroller,
           start: 'top bottom',
           end: rotationEnd,
-          scrub: true
+          toggleActions: 'play none none reverse'
         }
       }
     );
@@ -73,15 +74,16 @@ const ScrollReveal = ({
       wordElements,
       { opacity: baseOpacity, willChange: 'opacity' },
       {
-        ease: 'none',
+        ease: 'power2.out',
+        duration: 1,
         opacity: 1,
-        stagger: 0.05,
+        stagger: 0.02,
         scrollTrigger: {
           trigger: el,
           scroller,
-          start: 'top bottom-=20%',
+          start: 'top bottom-=10%',
           end: wordAnimationEnd,
-          scrub: true
+          toggleActions: 'play none none reverse'
         }
       }
     );
@@ -91,15 +93,16 @@ const ScrollReveal = ({
         wordElements,
         { filter: `blur(${blurStrength}px)` },
         {
-          ease: 'none',
+          ease: 'power2.out',
+          duration: 1,
           filter: 'blur(0px)',
-          stagger: 0.05,
+          stagger: 0.02,
           scrollTrigger: {
             trigger: el,
             scroller,
-            start: 'top bottom-=20%',
+            start: 'top bottom-=10%',
             end: wordAnimationEnd,
-            scrub: true
+            toggleActions: 'play none none reverse'
           }
         }
       );

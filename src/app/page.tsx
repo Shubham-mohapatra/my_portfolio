@@ -9,6 +9,8 @@ import ProjectsSection from "../components/ProjectsSection";
 
 import VariableProximity from "../components/VariableProximity";
 import MobileDock from "../components/MobileNav";
+import StarBorder from "../components/StarBorder";
+import { ShimmerButton } from "../components/ui/shimmer-button";
 import { useState, useEffect, useRef } from "react"
 
 const navItems = [
@@ -153,14 +155,14 @@ export default function Home() {
 
             <div>
               <div className="flex gap-4">
-                <a 
-                  href="https://github.com/Shubham-mohapatra"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold rounded-full hover:scale-105 transition-transform duration-300 inline-block"
+                <ShimmerButton
+                  onClick={() => window.open("https://github.com/Shubham-mohapatra", "_blank")}
+                  className="shadow-2xl"
                 >
-                  View My Work
-                </a>
+                  <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-lg">
+                    View My Work
+                  </span>
+                </ShimmerButton>
                 <button 
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                   className="px-8 py-4 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-purple-900 transition-all duration-300"

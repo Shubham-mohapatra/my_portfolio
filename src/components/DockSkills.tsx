@@ -18,6 +18,7 @@ import {
 } from "lucide-react"
 import { MotionValue, motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { useRef, useState } from "react"
+import Image from "next/image"
 
 export interface Skill {
   name: string
@@ -89,12 +90,13 @@ function DockIcon({ mouseX, skill, index }: { mouseX: MotionValue; skill: Skill;
       whileTap={{ scale: 0.85, transition: { duration: 0.1 } }}
       className="aspect-square rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center relative group cursor-pointer hover:bg-white/10 transition-colors flex-shrink-0"
     >
-      <div className="w-full h-full p-2 flex items-center justify-center">
+      <div className="w-full h-full p-2 flex items-center justify-center relative">
         {typeof skill.icon === 'string' ? (
-          <img 
+          <Image 
             src={skill.icon} 
             alt={skill.name} 
-            className="w-full h-full object-contain"
+            fill
+            className="object-contain p-2"
           />
         ) : (
           <div className="w-full h-full p-1">{skill.icon}</div>
