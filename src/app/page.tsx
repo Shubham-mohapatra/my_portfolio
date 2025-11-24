@@ -6,6 +6,11 @@ import Footer from "../components/Footer";
 import LetterGlitch from "../components/LetterGlitch";
 import RotatingText from "../components/RotatingText";
 import ProjectsSection from "../components/ProjectsSection";
+import { Timeline } from "../components/ui/timeline";
+import ScrollAnimation from "../components/ScrollAnimation";
+import ScrollReveal from "../components/ScrollReveal";
+import { LetterSwapForward as LetterSwap } from "@/components/ui/letter-swap";
+import { TextEffect } from "@/components/ui/text-effect";
 
 import VariableProximity from "../components/VariableProximity";
 import MobileDock from "../components/MobileNav";
@@ -20,11 +25,26 @@ const navItems = [
   { label: 'Resume', href: '#' }
 ]
 
+import { useInView } from "framer-motion";
+
+const ScrollText = ({ children, className, ...props }: any) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-20%" });
+  return (
+    <div ref={ref} className={className}>
+      <TextEffect trigger={isInView} {...props}>
+        {children}
+      </TextEffect>
+    </div>
+  );
+};
+
 export default function Home() {
   const [activeSection, setActiveSection] = useState('#about')
   const [showNav, setShowNav] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
+  const timelineHeadingRef = useRef<HTMLDivElement>(null)
 
   const scrollToAbout = () => {
     const aboutSection = document.getElementById('about')
@@ -185,6 +205,104 @@ export default function Home() {
         </div>
 
         <AboutSection />
+        
+        {/* Timeline Section */}
+        <section className="relative z-10 min-h-screen py-20 px-6">
+          <div className="container mx-auto max-w-7xl">
+            <ScrollAnimation animation="fade-up" delay={200}>
+              <div className="text-center mb-16">
+                <div 
+                  ref={timelineHeadingRef}
+                  className="mb-4 relative inline-block"
+                >
+                  <VariableProximity
+                    label="My Journey."
+                    className="text-5xl md:text-7xl font-bold text-white tracking-tight cursor-default"
+                    fromFontVariationSettings="'wght' 700, 'opsz' 9"
+                    toFontVariationSettings="'wght' 1000, 'opsz' 40"
+                    containerRef={timelineHeadingRef as React.RefObject<HTMLElement>}
+                    radius={100}
+                    falloff="linear"
+                  />
+                </div>
+                <ScrollReveal 
+                  baseOpacity={0.3}
+                  enableBlur={true}
+                  baseRotation={1}
+                  blurStrength={5}
+                  containerClassName=""
+                  textClassName="text-xl text-gray-400 max-w-2xl mx-auto"
+                >
+                  From humble beginnings to building impactful solutions — a chronicle of growth, learning, and innovation.
+                </ScrollReveal>
+              </div>
+            </ScrollAnimation>
+            
+            <Timeline data={[
+              {
+                title: "Present",
+                content: (
+                  <div>
+                    <div className="text-white dark:text-white text-2xl md:text-4xl font-bold mb-4">
+                      <LetterSwap
+                        label="Building & Hunting"
+                        staggerFrom="center"
+                        reverse={false}
+                        className="text-2xl md:text-4xl font-bold"
+                      />
+                    </div>
+                    <div className="text-white dark:text-white text-base md:text-lg font-normal mb-8">
+                      <ScrollText per='word' preset='fade'>
+                        Currently building scalable applications and hunting for the perfect job opportunity. Transforming complex problems into elegant solutions.
+                      </ScrollText>
+                    </div>
+                  </div>
+                ),
+              },
+              {
+                title: "2023",
+                content: (
+                  <div>
+                    <div className="text-white dark:text-white text-2xl md:text-4xl font-bold mb-4">
+                      <LetterSwap
+                        label="Full Stack Developer"
+                        staggerFrom="center"
+                        reverse={false}
+                        className="text-2xl md:text-4xl font-bold"
+                      />
+                    </div>
+                    <div className="text-white dark:text-white text-base md:text-lg font-normal mb-8">
+                      <ScrollText per='word' preset='fade'>
+                        Built my first full-stack application and explored AI integration. Deepened knowledge in React, Next.js, and Cloud technologies.
+                      </ScrollText>
+                    </div>
+                  </div>
+                ),
+              },
+              {
+                title: "2022",
+                content: (
+                  <div>
+                    <div className="text-white dark:text-white text-2xl md:text-4xl font-bold mb-4">
+                      <LetterSwap
+                        label="Joined KIIT"
+                        staggerFrom="center"
+                        reverse={false}
+                        className="text-2xl md:text-4xl font-bold"
+                      />
+                    </div>
+                    <div className="text-white dark:text-white text-base md:text-lg font-normal mb-8">
+                      <ScrollText per='word' preset='fade'>
+                        Started my B.Tech in Computer Science Engineering at Kalinga Institute of Industrial Technology. The beginning of my professional coding journey.
+                      </ScrollText>
+                    </div>
+                  </div>
+                ),
+              },
+            ]} />
+          </div>
+        </section>
+        
         <SkillsSection />
         <ProjectsSection />
         <Footer />
