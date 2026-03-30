@@ -43,7 +43,7 @@ const AboutSection = () => {
                   containerClassName="mb-4"
                   textClassName="font-bold text-sm md:text-base"
                 >
-                  👋 Hey, I'm Shubham Mohapatra — a full-stack developer and AI/ML enthusiast who loves building smart, meaningful digital experiences.
+                  Hey, I'm Shubham Mohapatra — a full-stack developer and AI/ML enthusiast who loves building smart, meaningful digital experiences.
                 </ScrollReveal>
                 <ScrollReveal 
                   baseOpacity={0.2}

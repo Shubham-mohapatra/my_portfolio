@@ -43,7 +43,10 @@
   display: flex;
   align-items: center;
   height: var(--nav-h);
-  background: var(--base, #000);
+  background: color-mix(in srgb, var(--base, #000) 30%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 9999px;
 }
 
@@ -209,7 +212,10 @@
   top: 3em;
   left: 1rem;
   right: 1rem;
-  background: var(--base, #f0f0f0);
+  background: color-mix(in srgb, var(--base, #f0f0f0) 50%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 27px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   z-index: 998;

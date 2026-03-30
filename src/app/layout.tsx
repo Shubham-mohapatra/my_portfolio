@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 import { Roboto_Flex } from "next/font/google";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const robotoFlex = Roboto_Flex({
   subsets: ["latin"],
@@ -57,9 +58,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} ${robotoFlex.variable}`}>
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

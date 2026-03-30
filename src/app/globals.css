@@ -100,7 +100,6 @@ a {
   animation-delay: 4s;
 }
 
-/* Three.js background positioning */
 .three-background {
   z-index: 1;
   position: fixed;
@@ -345,4 +344,9 @@ a {
     transform: translate(calc(100cqw - 100%), 0);
     }
   }
+}
+
+::view-transition-old(root), ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
 }

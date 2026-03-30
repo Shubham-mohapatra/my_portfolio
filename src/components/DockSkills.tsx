@@ -124,6 +124,10 @@ export default function DockSkills() {
     <div className="w-full min-h-[300px] flex flex-col items-center justify-center overflow-hidden">
       <div 
         className="w-full max-w-[100vw] relative"
+        style={{ 
+          WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)', 
+          maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' 
+        }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => {
           setIsHovered(false)
@@ -131,10 +135,6 @@ export default function DockSkills() {
         }}
         onMouseMove={(e) => mouseX.set(e.pageX)}
       >
-        {/* Gradient Masks for seamless fade */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#030014] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#030014] to-transparent z-10 pointer-events-none" />
-
         {/* Marquee Container */}
         <motion.div 
           className="flex items-end gap-4 p-4 w-max"

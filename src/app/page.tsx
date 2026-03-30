@@ -3,7 +3,7 @@ import PillNav from "../components/PillNav";
 import AboutSection from "../components/AboutSection";
 import SkillsSection from "../components/SkillsSection";
 import Footer from "../components/Footer";
-import LetterGlitch from "../components/LetterGlitch";
+import Grainient from "../components/Grainient";
 import RotatingText from "../components/RotatingText";
 import ProjectsSection from "../components/ProjectsSection";
 import { Timeline } from "../components/ui/timeline";
@@ -17,6 +17,9 @@ import MobileDock from "../components/MobileNav";
 import StarBorder from "../components/StarBorder";
 import { ShimmerButton } from "../components/ui/shimmer-button";
 import { useState, useEffect, useRef } from "react"
+import { useTheme } from "next-themes"
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
+
 
 const navItems = [
   { label: 'About', href: '#about' },
@@ -41,6 +44,10 @@ const ScrollText = ({ children, className, ...props }: any) => {
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('#about')
+  const { resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  
+  useEffect(() => setMounted(true), [])
   const [showNav, setShowNav] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -101,13 +108,34 @@ export default function Home() {
 
   return (
     <div className="bg-black relative overflow-hidden">
+      <div className="fixed top-4 right-4 z-[100] md:top-6 md:right-6">
+        <AnimatedThemeToggler className="bg-white/90 dark:bg-black/80 backdrop-blur-md shadow-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" />
+      </div>
       {/* Fixed background */}
-      <div className="fixed inset-0 w-full h-full z-0 background-overlay">
-        <LetterGlitch
-          glitchSpeed={50}
-          centerVignette={false}
-          outerVignette={true}
-          smooth={true}
+      <div className="fixed inset-0 w-full h-full z-0">
+        <Grainient
+          color1={mounted && resolvedTheme === 'dark' ? "#1e0b36" : "#FF9FFC"}
+          color2={mounted && resolvedTheme === 'dark' ? "#0f0724" : "#5227FF"}
+          color3={mounted && resolvedTheme === 'dark' ? "#2e1554" : "#B19EEF"}
+          timeSpeed={0.25}
+          colorBalance={0}
+          warpStrength={1}
+          warpFrequency={5}
+          warpSpeed={2}
+          warpAmplitude={50}
+          blendAngle={0}
+          blendSoftness={0.05}
+          rotationAmount={500}
+          noiseScale={2}
+          grainAmount={0.1}
+          grainScale={2}
+          grainAnimated={false}
+          contrast={1.5}
+          gamma={1}
+          saturation={1}
+          centerX={0}
+          centerY={0}
+          zoom={0.9}
         />
       </div>
 
@@ -120,10 +148,10 @@ export default function Home() {
           activeHref={activeSection}
           className="custom-nav"
           ease="power2.easeOut"
-          baseColor="#000000"
-          pillColor="#ffffff"
+          baseColor={mounted && resolvedTheme === 'light' ? "rgba(0,0,0,0.8)" : "rgba(255,255,255,0.1)"}
+          pillColor={mounted && resolvedTheme === 'light' ? "#ffffff" : "#1f2937"}
           hoveredPillTextColor="#ffffff"
-          pillTextColor="#000000"
+          pillTextColor={mounted && resolvedTheme === 'light' ? "#000000" : "#ffffff"}
           onMobileMenuClick={() => {}}
           />
         </div>
@@ -168,7 +196,7 @@ export default function Home() {
             </div>
             
             <div>
-              <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mb-8">
+              <p className="text-xl md:text-2xl text-white font-medium drop-shadow-md max-w-3xl mb-8">
                 Creating digital experiences that blend creativity with functionality
               </p>
             </div>
@@ -231,7 +259,7 @@ export default function Home() {
                   baseRotation={1}
                   blurStrength={5}
                   containerClassName=""
-                  textClassName="text-xl text-gray-400 max-w-2xl mx-auto"
+                  textClassName="text-xl text-white font-medium drop-shadow-md max-w-2xl mx-auto"
                 >
                   From humble beginnings to building impactful solutions — a chronicle of growth, learning, and innovation.
                 </ScrollReveal>

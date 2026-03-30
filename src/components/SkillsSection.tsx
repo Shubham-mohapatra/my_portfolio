@@ -47,7 +47,7 @@ const SkillsSection = () => {
               baseRotation={1}
               blurStrength={5}
               containerClassName=""
-              textClassName="text-xl text-gray-400 max-w-2xl mx-auto"
+              textClassName="text-xl text-white font-medium drop-shadow-md max-w-2xl mx-auto"
             >
               Technologies and tools I work with to build innovative solutions.
             </ScrollReveal>
