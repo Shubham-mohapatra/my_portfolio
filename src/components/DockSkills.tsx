@@ -18,7 +18,7 @@ import {
 } from "lucide-react"
 import { MotionValue, motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { useRef, useState } from "react"
-import Image from "next/image"
+
 
 export interface Skill {
   name: string
@@ -92,11 +92,11 @@ function DockIcon({ mouseX, skill, index }: { mouseX: MotionValue; skill: Skill;
     >
       <div className="w-full h-full p-2 flex items-center justify-center relative">
         {typeof skill.icon === 'string' ? (
-          <Image 
+          <img 
             src={skill.icon} 
             alt={skill.name} 
-            fill
-            className="object-contain p-2"
+            className="absolute inset-0 w-full h-full object-contain p-2"
+            loading="lazy"
           />
         ) : (
           <div className="w-full h-full p-1">{skill.icon}</div>
