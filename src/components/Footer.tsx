@@ -31,7 +31,7 @@ const Footer = () => {
   ]
 
   return (
-    <footer id="contact" className="bg-transparent border-t border-white/10 pt-16 pb-8">
+    <footer id="contact" className="bg-transparent pt-16 pb-8">
       <div className="container mx-auto max-w-6xl px-6">
         <div className="flex flex-col items-center text-center mb-12">
           <div 
@@ -54,7 +54,7 @@ const Footer = () => {
             baseRotation={1}
             blurStrength={5}
             containerClassName="mb-8"
-            textClassName="text-gray-300 max-w-xl leading-relaxed text-lg"
+            textClassName="text-white font-medium drop-shadow-md max-w-xl leading-relaxed text-lg"
           >
             I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
           </ScrollReveal>
@@ -74,7 +74,7 @@ const Footer = () => {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`text-gray-400 transition-all duration-300 p-2 hover:bg-white/5 rounded-full ${link.color}`}
+                className={`text-white/90 drop-shadow-md transition-all duration-300 p-2 hover:bg-white/5 rounded-full ${link.color}`}
                 aria-label={link.label}
               >
                 {link.icon}
@@ -83,7 +83,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+        <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white font-medium drop-shadow-md">
           <p>© {currentYear} Shubham Mohapatra. All rights reserved.</p>
           <p className="flex items-center gap-1">
             Made with <span className="text-red-500">♥</span> by Shubham Mohapatra

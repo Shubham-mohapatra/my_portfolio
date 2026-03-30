@@ -62,6 +62,7 @@ export const skillsData: Skill[] = [
   { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg", category: "Tools" },
   { name: "VS Code", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg", category: "Tools" },
   { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", category: "Tools" },
+  { name: "GitHub", icon: "https://cdn.simpleicons.org/github/white", category: "Tools" },
 ]
 
 function DockIcon({ mouseX, skill, index }: { mouseX: MotionValue; skill: Skill; index: number }) {

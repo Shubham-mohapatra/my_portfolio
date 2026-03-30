@@ -123,7 +123,7 @@ const ProjectsSection = () => {
             baseRotation={2}
             blurStrength={6}
             containerClassName="mb-32"
-            textClassName="text-2xl md:text-3xl text-gray-400 max-w-3xl leading-relaxed"
+            textClassName="text-2xl md:text-3xl text-white font-medium drop-shadow-md max-w-3xl leading-relaxed"
           >
             Forging raw ideas into polished digital realities. A curated selection of my technical endeavors.
           </ScrollReveal>
@@ -143,7 +143,7 @@ const ProjectsSection = () => {
                   
                   <h3 className="text-5xl md:text-7xl font-bold text-white leading-tight group cursor-default">
                     {project.title}
-                    <span className="block text-2xl md:text-3xl text-gray-500 font-normal mt-2 group-hover:text-purple-400 transition-colors duration-300">
+                    <span className="block text-2xl md:text-3xl text-white font-normal mt-2 group-hover:text-purple-400 transition-colors duration-300">
                       {project.subtitle}
                     </span>
                   </h3>
@@ -156,7 +156,7 @@ const ProjectsSection = () => {
                     baseRotation={1}
                     blurStrength={5}
                     containerClassName=""
-                    textClassName="text-xl text-gray-400 leading-relaxed max-w-lg"
+                    textClassName="text-xl text-white font-medium drop-shadow-md leading-relaxed max-w-lg"
                   >
                     {project.description}
                   </ScrollReveal>
@@ -169,7 +169,7 @@ const ProjectsSection = () => {
                         key={tag} 
                         variant="outline" 
                         size="sm" 
-                        className="text-sm font-bold bg-black text-white border-white/20 hover:bg-gray-800"
+                        className="text-sm font-bold bg-white/5 text-white border-white/20 hover:bg-white/10 backdrop-blur-sm"
                         rippleClassName="bg-white/20"
                       >
                         {tag}
@@ -184,7 +184,7 @@ const ProjectsSection = () => {
                       Live Demo
                       <ArrowUpRight className="w-5 h-5 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
                     </a>
-                    <a href={project.links.github} className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-lg font-medium">
+                    <a href={project.links.github} className="flex items-center gap-2 text-white/90 hover:text-white drop-shadow-md transition-colors text-lg font-medium">
                       <Github className="w-5 h-5" />
                       Source
                     </a>

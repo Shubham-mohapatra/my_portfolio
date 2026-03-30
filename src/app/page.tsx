@@ -273,7 +273,7 @@ export default function Home() {
                   <div>
                     <div className="text-white dark:text-white text-2xl md:text-4xl font-bold mb-4">
                       <LetterSwap
-                        label="Building & Hunting"
+                        label="It Finally Worked"
                         staggerFrom="center"
                         reverse={false}
                         className="text-2xl md:text-4xl font-bold"
@@ -281,7 +281,7 @@ export default function Home() {
                     </div>
                     <div className="text-white dark:text-white text-base md:text-lg font-normal mb-8">
                       <ScrollText per='word' preset='fade'>
-                        Currently building scalable applications and hunting for the perfect job opportunity. Transforming complex problems into elegant solutions.
+                        After countless attempts, things finally clicked — officially started my professional journey.
                       </ScrollText>
                     </div>
                   </div>
@@ -293,7 +293,7 @@ export default function Home() {
                   <div>
                     <div className="text-white dark:text-white text-2xl md:text-4xl font-bold mb-4">
                       <LetterSwap
-                        label="Full Stack Developer"
+                        label="Trial & Error"
                         staggerFrom="center"
                         reverse={false}
                         className="text-2xl md:text-4xl font-bold"
@@ -301,7 +301,7 @@ export default function Home() {
                     </div>
                     <div className="text-white dark:text-white text-base md:text-lg font-normal mb-8">
                       <ScrollText per='word' preset='fade'>
-                        Built my first full-stack application and explored AI integration. Deepened knowledge in React, Next.js, and Cloud technologies.
+                        A year of trying, failing, learning, and pretending I had everything under control.
                       </ScrollText>
                     </div>
                   </div>
@@ -313,7 +313,7 @@ export default function Home() {
                   <div>
                     <div className="text-white dark:text-white text-2xl md:text-4xl font-bold mb-4">
                       <LetterSwap
-                        label="Joined KIIT"
+                        label="Joined College"
                         staggerFrom="center"
                         reverse={false}
                         className="text-2xl md:text-4xl font-bold"
@@ -321,7 +321,7 @@ export default function Home() {
                     </div>
                     <div className="text-white dark:text-white text-base md:text-lg font-normal mb-8">
                       <ScrollText per='word' preset='fade'>
-                        Started my B.Tech in Computer Science Engineering at Kalinga Institute of Industrial Technology. The beginning of my professional coding journey.
+                            Hello World → Why is nothing working?
                       </ScrollText>
                     </div>
                   </div>
