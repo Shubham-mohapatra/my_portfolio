@@ -44,8 +44,8 @@ export const skillsData: Skill[] = [
   // AI/ML
   { name: "GenAI", icon: <Brain className="w-full h-full text-purple-400" />, category: "AI" },
   { name: "RAG", icon: <Layers className="w-full h-full text-blue-400" />, category: "AI" },
-  { name: "LangChain", icon: <Workflow className="w-full h-full text-green-400" />, category: "AI" },
-  { name: "Gemini", icon: <Code2 className="w-full h-full text-blue-500" />, category: "AI" },
+  { name: "LangChain", icon: "https://cdn.simpleicons.org/langchain/white", category: "AI" },
+  { name: "Gemini", icon: "https://cdn.simpleicons.org/googlegemini/8E75B2", category: "AI" },
   { name: "CNNs", icon: <Cpu className="w-full h-full text-red-400" />, category: "AI" },
   
   // Web & Mobile
