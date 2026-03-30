@@ -103,7 +103,7 @@ const SkillsSection = () => {
                               <div className="w-full h-full p-1 text-gray-300 group-hover:text-white transition-colors">{skill.icon}</div>
                             )}
                           </div>
-                          <span className="text-sm font-medium text-gray-500 group-hover:text-white transition-colors">
+                          <span className="text-sm font-medium text-white/80 group-hover:text-white drop-shadow-md transition-colors">
                             {skill.name}
                           </span>
                         </div>
